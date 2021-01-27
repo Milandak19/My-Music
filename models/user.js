@@ -11,17 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsToMany(models.Song, { through: FavoritSong })
-      User.belongsToMany(models.Album, { through: FavoritAlbum })
-      User.belongsToMany(models.Playlist, { through: FavoritPlaylist })
-      User.belongsToMany(models.Song, { through: Playlist })
+      User.belongsToMany(models.Song, { through: models.FavoritSong })
+      User.belongsToMany(models.Album, { through: models.FavoritAlbum })
     }
   };
   User.init({
     full_name: DataTypes.STRING,
     username: DataTypes.STRING,
     email: DataTypes.STRING,
-    no_telp: DataTypes.INTEGER,
+    no_telp: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
