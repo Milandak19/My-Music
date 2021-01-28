@@ -1,4 +1,5 @@
 'use strict';
+const axios = require('axios');
 const {
   Model
 } = require('sequelize');
@@ -13,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Album.hasMany(models.Song)
       Album.belongsToMany(models.User, { through: models.FavoritAlbum })
+    }
+    static getAlbumId(name) {
+      return axios.get(`https://api.deezer.com/search/album?q=${name}`)
     }
   };
   Album.init({

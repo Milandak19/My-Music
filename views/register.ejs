@@ -5,22 +5,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    .container {
+      padding: 16px;
+      background-color: white;
+    }
+
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    input[type=submit]:hover {
+      opacity: 1;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Register</h1>
-  <form method="post">
-    <label for="full_name">Full Name</label><br>
-    <input type="text" name="full_name"><br>
-    <label for="username">Username</label><br>
-    <input type="text" name="username"><br>
-    <label for="email">Email</label><br>
-    <input type="text" name="email"><br>
-    <label for="no_telp">No Telepon</label><br>
-    <input type="text" name="no_telp"><br>
-    <label for="password">Password</label><br>
-    <input type="password" name="password"><br>
-    <input type="submit" value="Register"><br>
+  <div class="container">
+    <h1>Register</h1>
+    <form method="post">
+      <label for="full_name">Full Name</label><br>
+      <input type="text" name="full_name"><br>
+      <label for="username">Username</label><br>
+      <input type="text" name="username"><br>
+      <label for="email">Email</label><br>
+      <input type="text" name="email"><br>
+      <label for="no_telp">No Telepon</label><br>
+      <input type="text" name="no_telp"><br>
+      <label for="password">Password</label><br>
+      <input type="password" name="password"><br>
+      <input type="submit" value="Register"><br>
+  </div>
+  <div class="container signin">
+    <p>Already have an account? <a href="/login">Sign in</a>.</p>
+  </div>
   </form>
 </body>
 

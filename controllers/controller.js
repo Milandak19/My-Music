@@ -20,11 +20,10 @@ class Controller {
       .then(data => {
         let password = checkPwd(input.password, data[0].password)
         if (password && data.length !== 0) {
-          console.log(data);
           req.session.userId = data[0].id
           req.session.username = data[0].username
           if (data[0].role === 'admin') {
-            res.redirect('/admin')
+            res.redirect('/addNewSong')
           } else {
             res.redirect(`/${req.session.username}`)
           }
@@ -64,11 +63,12 @@ class Controller {
       })
   }
   static musicPlayer(req, res) {
+    let username = req.session.username
     axios.get(`https://api.deezer.com/track/${req.params.embedUrl}`)
       .then(data => {
         let json = CircularJSON.stringify(data.data);
         let temp = JSON.parse(json)
-        res.render('musicPlayer', { temp })
+        res.render('musicPlayer', { temp, username })
       })
       .catch(function (error) {
         res.send(error.message)
@@ -93,14 +93,30 @@ class Controller {
       res.redirect('/login')
     })
   }
-  static adminPage(req, res) {
-    res.render('adminPage')
-  }
-  static addNewSong(req, res) {
+  static addNewSongGet(req, res) {
     res.render('addSongPage')
   }
-  static addNewAlbum(req, res) {
-    res.render('addAlbum')
+  static addNewSongPost(req, res) {
+    let { title, albumName } = req.body
+    let tempEmbed
+    axios.get(`https://api.deezer.com/search/track?q=${title}`)
+      .then(data => {
+        let json = CircularJSON.stringify(data.data.data);
+        let temp = JSON.parse(json)
+        tempEmbed = String(temp[0].id)
+        return Song.create({
+          title: title,
+          AlbumId: 1,
+          embed_url: tempEmbed
+        })
+      })
+      .then(data => {
+        res.redirect('/addNewSong')
+      })
+      .catch(err => {
+        res.send(err.message)
+      })
+
   }
   static search(req, res) {
     let search = req.body.search
