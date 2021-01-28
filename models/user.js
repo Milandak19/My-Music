@@ -23,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate: (user, options) => {
+        if (!user.role) {
+          user.role = 'user'
+        }
+      }
+    },
     sequelize,
     modelName: 'User',
   });

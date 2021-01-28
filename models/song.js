@@ -1,4 +1,6 @@
 'use strict';
+const axios = require('axios');
+const CircularJSON = require('circular-json')
 const {
   Model
 } = require('sequelize');
@@ -20,6 +22,20 @@ module.exports = (sequelize, DataTypes) => {
     embed_url: DataTypes.STRING,
     AlbumId: DataTypes.INTEGER
   }, {
+    hooks: {
+      beforeCreate: (song, options) => {
+        axios.get(`https://api.deezer.com/search/track?q=${song.title}`)
+          .then(data => {
+            song.embed_url = data.data.data[0].id
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        if (!song.AlbumId) {
+          song.AlbumId = null
+        }
+      }
+    },
     sequelize,
     modelName: 'Song',
   });

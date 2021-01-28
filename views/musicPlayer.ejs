@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Music</title>
+  <style>
+    .box {
+      text-align: center;
+      height: 740px;
+      width: 55%;
+      border-radius: 20px;
+      margin: 10px auto;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: white;
+    }
+
+    h2 {
+      padding-top: 5px;
+    }
+
+    img {
+      border-radius: 15px;
+    }
+
+    a {
+      text-decoration: none;
+      padding: 10px 10px;
+      background-color: teal;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .a {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="a">
+    <a href="/<%= username %>">Back</a>
+  </div>
+  <div class="box">
+    <h2>
+      <%= temp.artist.name %>
+    </h2>
+    <img src="<%= temp.album.cover_big %>">
+    <h4>
+      <%= temp.album.title %>
+    </h4>
+    <p>
+      <%= temp.title %>
+    </p>
+    <audio controls>
+      <source src="<%= temp.preview %>" type="audio/mpeg">
+    </audio>
+  </div>
+</body>
+
+</html>
